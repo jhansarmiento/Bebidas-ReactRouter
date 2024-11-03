@@ -7,8 +7,6 @@ export default function HeaderForm() {
   const fecthCategories = useAppStore( state => state.fetchCategories)
   const categories = useAppStore( state => state.categories)
 
-  console.log(categories)
-
   useEffect(() => {
     fecthCategories()
   }, [])
@@ -45,6 +43,13 @@ export default function HeaderForm() {
           className="p-3 w-full rounded-lg focus:outline-none"
         >
           <option value="">-- Select An Option --</option>
+          {/* Muestra las categorías al iterar la respuesta de la API */}
+          {categories.drinks.map(category => (
+            <option 
+              key={category.strCategory}
+              value={category.strCategory}
+            >{category.strCategory}</option>
+          ))}
         </select>
         <input
           type="submit"
