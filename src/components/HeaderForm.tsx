@@ -1,8 +1,20 @@
-import { useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useAppStore } from "../stores/useAppStore";
 
 
 export default function HeaderForm() {
+
+  const [searchFilter, setsearchFilter] =useState({
+    ingredient: '',
+    category: ''
+  })
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
+    setsearchFilter({
+      ...searchFilter,
+      [e.target.name] : e.target.value
+    })
+  }
 
   const fecthCategories = useAppStore( state => state.fetchCategories)
   const categories = useAppStore( state => state.categories)
@@ -27,6 +39,8 @@ export default function HeaderForm() {
           name="ingredient"
           className="p-3 w-full rounded-lg focus:outline-none"
           placeholder="Name Or Ingredient. E.g Vodka, Tequila, Coffee"
+          onChange={handleChange}
+          value={searchFilter.ingredient}
         />
       </div>
 
@@ -41,6 +55,8 @@ export default function HeaderForm() {
           id="category"
           name="category"
           className="p-3 w-full rounded-lg focus:outline-none"
+          onChange={handleChange}
+          value={searchFilter.category}
         >
           <option value="">-- Select An Option --</option>
           {/* Muestra las categorías al iterar la respuesta de la API */}
