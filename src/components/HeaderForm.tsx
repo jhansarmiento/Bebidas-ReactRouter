@@ -1,8 +1,12 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useAppStore } from "../stores/useAppStore";
 
 
 export default function HeaderForm() {
+
+  const fecthCategories = useAppStore( state => state.fetchCategories)
+  const categories = useAppStore( state => state.categories)
+  const searchRecipes = useAppStore(state => state.searchRecipes)
 
   const [searchFilter, setsearchFilter] =useState({
     ingredient: '',
@@ -16,15 +20,26 @@ export default function HeaderForm() {
     })
   }
 
-  const fecthCategories = useAppStore( state => state.fetchCategories)
-  const categories = useAppStore( state => state.categories)
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    // TODO: Validamos que el formulario contenga valores
+    if(Object.values(searchFilter).includes('')){
+      console.log('todos los campos son necesarios')
+      return
+    }
+    //Consulta las recetas
+    searchRecipes(searchFilter)
+  }
 
   useEffect(() => {
     fecthCategories()
   }, [])
 
   return (
-    <form className="md:w-1/2 2xl:w-1/3 bg-orange-400 my-32 p-10 rounded-lg shadow space-y-6">
+    <form 
+      className="md:w-1/2 2xl:w-1/3 bg-orange-400 my-32 p-10 rounded-lg shadow space-y-6"
+      onSubmit={handleSubmit}  
+    >
       <div className="space-y-4">
         <label
           htmlFor="ingredient"
