@@ -1,12 +1,14 @@
 import { StateCreator } from "zustand"
-import { getCategories, getRecipes } from "../services/RecipeService"
-import { Categories, Drinks, SearchFilter } from "../types"
+import { getCategories, getRecipeById, getRecipes } from "../services/RecipeService"
+import { Categories, Drink, Drinks, Recipe, SearchFilter } from "../types"
 
 export type RecypeSliceType = {
     categories: Categories
     drinks: Drinks
+    selectedRecipe: Recipe
     fetchCategories: () => Promise<void>
     searchRecipes: (SearchFilter : SearchFilter) => Promise<void>
+    selectRecipe: (id: Drink['idDrink']) => Promise<void>
 }
 
 export const createRecipesSlice : StateCreator<RecypeSliceType> = (set) => ({
@@ -17,6 +19,7 @@ export const createRecipesSlice : StateCreator<RecypeSliceType> = (set) => ({
     drinks: {
         drinks: []
     },
+    selectedRecipe: {} as Recipe,
 
     // Consulta las categorías que mostraremos en el form desde la API
     fetchCategories: async () => {
@@ -32,6 +35,12 @@ export const createRecipesSlice : StateCreator<RecypeSliceType> = (set) => ({
         const drinks = await getRecipes(searchFilter)
         set({
             drinks
+        })
+    },
+    selectRecipe: async (id) => {
+        const selectedRecipe = await getRecipeById(id)
+        set({
+            selectedRecipe
         })
     }
 })
