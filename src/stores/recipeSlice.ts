@@ -6,9 +6,11 @@ export type RecypeSliceType = {
     categories: Categories
     drinks: Drinks
     selectedRecipe: Recipe
+    modal: boolean
     fetchCategories: () => Promise<void>
     searchRecipes: (SearchFilter : SearchFilter) => Promise<void>
     selectRecipe: (id: Drink['idDrink']) => Promise<void>
+    closeModal: () => void
 }
 
 export const createRecipesSlice : StateCreator<RecypeSliceType> = (set) => ({
@@ -16,10 +18,14 @@ export const createRecipesSlice : StateCreator<RecypeSliceType> = (set) => ({
     categories: {
         drinks: []
     },
+
     drinks: {
         drinks: []
     },
+
     selectedRecipe: {} as Recipe,
+
+    modal: false,
 
     // Consulta las categorías que mostraremos en el form desde la API
     fetchCategories: async () => {
@@ -37,10 +43,22 @@ export const createRecipesSlice : StateCreator<RecypeSliceType> = (set) => ({
             drinks
         })
     },
+
+    //Selecciona una receta de las recetas que proporciona la API y abre el modal
     selectRecipe: async (id) => {
         const selectedRecipe = await getRecipeById(id)
         set({
-            selectedRecipe
+            selectedRecipe,
+            modal: true
+        })
+    },
+
+    // Función que cierra el modal y reinicia el state de la receta seleccionada
+    closeModal: () => {
+        set({
+            modal: false,
+            selectedRecipe: {} as Recipe
         })
     }
+
 })
