@@ -4,9 +4,10 @@ import { useAppStore } from "../stores/useAppStore";
 import { Recipe } from "../types";
 
 export default function Modal() {
-  const modal = useAppStore((state) => state.modal);
-  const closeModal = useAppStore((state) => state.closeModal);
-  const selectedRecipe = useAppStore((state) => state.selectedRecipe);
+  const modal = useAppStore((state) => state.modal)
+  const closeModal = useAppStore((state) => state.closeModal)
+  const selectedRecipe = useAppStore((state) => state.selectedRecipe)
+  const handleClickFavorite = useAppStore((state) => state.handleClickFavorite)
 
   // Esta función itera dinamicante en la respuesta de la API para mostrar
   // los ingredientes y las medidas
@@ -57,7 +58,8 @@ export default function Modal() {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel 
-                    className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6"
+                    className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left 
+                    shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6"
                 >
 
                   <Dialog.Title
@@ -100,6 +102,7 @@ export default function Modal() {
                     <button
                         type="button"
                         className="w-full rounded-lg bg-orange-500 hover:bg-orange-600 p-3 font-bold uppercase text-white"
+                        onClick={() => handleClickFavorite(selectedRecipe)}
                     >
                         Add To Favorites
                     </button>
