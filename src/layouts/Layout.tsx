@@ -8,6 +8,7 @@ export default function Layout() {
 
   // Carga desde local storage
   const loadFromStorage = useAppStore(state => state.loadFromStorage)
+  
   useEffect(() => {
     loadFromStorage()
   }, [])

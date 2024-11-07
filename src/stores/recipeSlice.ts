@@ -15,6 +15,7 @@ export type RecipeSliceType = {
 }
 // <StateCreator<RecipeSliceType & FavoritesSliceType, [], [], RecipeSliceType> => este codigo es necesario
 // Para consumir el estado de otro slice en este slice
+
 export const createRecipesSlice : StateCreator<RecipeSliceType & FavoritesSliceType, [], [], RecipeSliceType> = (set) => ({
     
     categories: {

@@ -14,6 +14,7 @@ export type FavoritesSliceType = {
 // <FavoritesSliceType & RecipeSliceType, [], [], FavoritesSliceType> => este codigo es necesario
 // Para consumir el estado de otro slice en este slice, en este caso lo estamos haciendo para consumir
 // la función de closeModal de recipeSlice en este slice
+
 export const createFavoritesSlice : StateCreator<FavoritesSliceType & RecipeSliceType, [], [], FavoritesSliceType> = (set, get, api) => ({
     favorites: [],
 
