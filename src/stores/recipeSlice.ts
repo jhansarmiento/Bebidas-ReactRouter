@@ -1,8 +1,9 @@
 import { StateCreator } from "zustand"
 import { getCategories, getRecipeById, getRecipes } from "../services/RecipeService"
 import { Categories, Drink, Drinks, Recipe, SearchFilter } from "../types"
+import { FavoritesSliceType } from "./favoritesSlice"
 
-export type RecypeSliceType = {
+export type RecipeSliceType = {
     categories: Categories
     drinks: Drinks
     selectedRecipe: Recipe
@@ -12,8 +13,9 @@ export type RecypeSliceType = {
     selectRecipe: (id: Drink['idDrink']) => Promise<void>
     closeModal: () => void
 }
-
-export const createRecipesSlice : StateCreator<RecypeSliceType> = (set) => ({
+// <StateCreator<RecipeSliceType & FavoritesSliceType, [], [], RecipeSliceType> => este codigo es necesario
+// Para consumir el estado de otro slice en este slice
+export const createRecipesSlice : StateCreator<RecipeSliceType & FavoritesSliceType, [], [], RecipeSliceType> = (set) => ({
     
     categories: {
         drinks: []

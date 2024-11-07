@@ -8,6 +8,7 @@ export default function Modal() {
   const closeModal = useAppStore((state) => state.closeModal)
   const selectedRecipe = useAppStore((state) => state.selectedRecipe)
   const handleClickFavorite = useAppStore((state) => state.handleClickFavorite)
+  const favoriteExists = useAppStore((state) => state.favoriteExists)
 
   // Esta función itera dinamicante en la respuesta de la API para mostrar
   // los ingredientes y las medidas
@@ -104,7 +105,7 @@ export default function Modal() {
                         className="w-full rounded-lg bg-orange-500 hover:bg-orange-600 p-3 font-bold uppercase text-white"
                         onClick={() => handleClickFavorite(selectedRecipe)}
                     >
-                        Add To Favorites
+                        {favoriteExists(selectedRecipe.idDrink) ? 'Remove From Favorites' : 'Add To Favorites'}
                     </button>
                   </div>
 

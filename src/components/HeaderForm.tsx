@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useAppStore } from "../stores/useAppStore";
 
-
 export default function HeaderForm() {
 
   const fecthCategories = useAppStore( state => state.fetchCategories)
@@ -37,7 +36,7 @@ export default function HeaderForm() {
 
   return (
     <form 
-      className="md:w-1/2 2xl:w-1/3 bg-orange-400 my-32 p-10 rounded-lg shadow space-y-6"
+      className="md:w-1/2 2xl:w-1/3 bg-orange-400 my-32 p-10 rounded-lg shadow space-y-2"
       onSubmit={handleSubmit}  
     >
       <div className="space-y-4">
@@ -75,7 +74,7 @@ export default function HeaderForm() {
         >
           <option value="">-- Select An Option --</option>
           {/* Muestra las categorías al iterar la respuesta de la API */}
-          {categories.drinks.map(category => (
+          {categories.drinks.map((category) => (
             <option 
               key={category.strCategory}
               value={category.strCategory}
