@@ -85,7 +85,7 @@ export default function HeaderForm() {
           type="submit"
           value="Search Recipes"
           className="cursor-pointer bg-orange-700 hover:bg-orange-900 
-                         text-white font-extrabold w-full p-2 rounded-lg uppercase"
+                       text-white font-extrabold w-full p-2 rounded-lg uppercase"
         />
       </div>
     </form>
