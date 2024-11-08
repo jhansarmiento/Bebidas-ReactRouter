@@ -6,6 +6,7 @@ export default function HeaderForm() {
   const fecthCategories = useAppStore( state => state.fetchCategories)
   const categories = useAppStore( state => state.categories)
   const searchRecipes = useAppStore(state => state.searchRecipes)
+  const showNotification = useAppStore(state => state.showNotification)
 
   const [searchFilter, setsearchFilter] =useState({
     ingredient: '',
@@ -21,9 +22,9 @@ export default function HeaderForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // TODO: Validamos que el formulario contenga valores
+    // Valida que el formulario contenga valores
     if(Object.values(searchFilter).includes('')){
-      console.log('todos los campos son necesarios')
+      showNotification({text:'All fields are mandatory', error: true})
       return
     }
     //Consulta las recetas
